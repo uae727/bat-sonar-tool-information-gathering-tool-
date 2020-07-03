@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import sys
 import platform
 import nmap 
@@ -5,18 +6,17 @@ from scapy.all import *
 import requests
 import socket
 import subprocess
-
+from colorama import Fore, Back, Style 
 print("###################################information gathering tool###################################")
-print("proggramed by kono dio da :D anyway if you have any idea or suggestion")
-print("version:1.1")
+print(Fore.RED + "proggramed by kono dio da :D anyway if you have any idea or suggestion ")
 print
-print("contact me by:")
-print
+print(Fore.BLUE + "contact me by:")
 print("email:backtrack292@gmail.com")
 print("twitter:@khalijyandroid") 
-print("################################################################################################")
+print(Fore.GREEN + "version:1.2")
+print(Fore.WHITE + "################################################################################################")
 print
-print("options:")
+print(Fore.YELLOW + "options:")
 print("1 ping target")
 print("2 scan headers for http/https website ")
 print("3 port scaning")
@@ -24,7 +24,7 @@ print("4 OS detect")
 print("5 scan network")
 print("6 exit")
 print
-selectednumber=int(input("select the option= "))
+selectednumber=int(input(Fore.WHITE + "select the option= "))
 if selectednumber == 1:
  targetip=raw_input("enter the target ip ")
  numberofpackets=int(input("enter the number of packets "))

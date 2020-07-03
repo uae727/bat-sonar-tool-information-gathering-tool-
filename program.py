@@ -8,7 +8,7 @@ import subprocess
 
 print("###################################information gathering tool###################################")
 print("proggramed by kono dio da :D anyway if you have any idea or suggestion")
-print("version:1.0")
+print("version:1.1")
 print
 print("contact me by:")
 print
@@ -81,7 +81,21 @@ if selectednumber == 4:
         print('')
  sys.exit()
 if selectednumber == 5:
-  for ping in range(1,255):
+ try:
+  print(" 1 scan with range ")
+  print(" 2 full scan ")
+  selectednumber5=int(input("select option"))
+ except KeyboardInterrupt: 
+  print("\n Exitting Program !!!!") 
+  sys.exit() 
+ except socket.gaierror:
+  print("\n Hostname Could Not Be Resolved !!!!") 
+  sys.exit() 
+ except socket.error: 
+  print("\ Server not responding !!!!") 
+ try:
+  if selectednumber5 == 2:
+   for ping in range(1,255):
     address = "192.168.0." + str(ping) 
     res = subprocess.call(['ping', '-c', '3', address]) 
     if res == 0: 
@@ -89,6 +103,36 @@ if selectednumber == 5:
      print(format(address)+ " is live")
      print
      print("#######################################################")
+ except KeyboardInterrupt: 
+  print("\n Exitting Program !!!!") 
+  sys.exit() 
+ except socket.gaierror:
+  print("\n Hostname Could Not Be Resolved !!!!") 
+  sys.exit() 
+ except socket.error: 
+  print("\ Server not responding !!!!") 
+  sys.exit()
+ try:
+  if selectednumber5 == 1:
+   minimum=int(input("enter the start range"))
+   maximum=int(input("enter the end range"))
+   for ping in range(minimum,maximum):
+    address = "192.168.0." + str(ping) 
+    res = subprocess.call(['ping', '-c', '3', address]) 
+    if res == 0: 
+     print
+     print(format(address)+ " is live")
+     print
+     print("#######################################################")
+ except KeyboardInterrupt: 
+  print("\n Exitting Program !!!!") 
+  sys.exit() 
+ except socket.gaierror:
+  print("\n Hostname Could Not Be Resolved !!!!") 
+  sys.exit() 
+ except socket.error: 
+  print("\ Server not responding !!!!") 
+  sys.exit()
   sys.exit()
 
 

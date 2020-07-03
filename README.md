@@ -4,7 +4,7 @@
 # options
 # 1 ping target
 # 2 scan headers for http/https website 
-# 3 port scaning")
+# 3 port scaning
 # 4 OS detect
 # 5 scan network
 # 6 exit

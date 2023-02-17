@@ -8,13 +8,16 @@ import socket
 import subprocess
 import time
 from colorama import Fore, Back, Style 
+import scapy.all as scapy
+import requests
+import json
 print("###################################"+Fore.RED+"The bat sonar"+Fore.WHITE+"###################################")
 print(Fore.RED + " information gathering tool proggramed by kono dio da :D anyway if you have any idea or suggestion ")
 print
 print(Fore.BLUE + "contact me by:")
 print("email:backtrack292@gmail.com")
 print("twitter:@khalijyandroid") 
-print(Fore.GREEN + "version:1.3")
+print(Fore.GREEN + "version:1.4")
 print(Fore.WHITE + "####################################################################################")
 print
 print(Fore.YELLOW + "options:")
@@ -23,7 +26,8 @@ print("2 scan headers for http/https website ")
 print("3 port scaning")
 print("4 OS detect")
 print("5 scan network")
-print("6 exit")
+print("6 capture network traffic and analyze it Using AI ")
+print("7 exit")
 print
 selectednumber=int(input(Fore.WHITE + "select the option= "))
 if selectednumber == 1:
@@ -150,8 +154,44 @@ if selectednumber == 5:
   sys.exit()
   sys.exit()
 
-
 if selectednumber == 6:
+ def capture_and_analyze():
+    # Define a filter to capture only the relevant network traffic (e.g. HTTP, HTTPS, DNS, etc.)
+    capture_filter = "tcp port 80 or tcp port 443 or udp port 53"
+
+    # Start capturing network traffic using Scapy
+    captured_packets = scapy.sniff(filter=capture_filter, count=100)
+
+    # Extract the payload of each captured packet
+    payloads = [packet.load for packet in captured_packets]
+
+    # Convert the payloads to text and concatenate them into a single string
+    text = ""
+    for payload in payloads:
+        try:
+            text += payload.decode("utf-8")
+        except UnicodeDecodeError:
+            continue
+
+    # Analyze the text using the OpenAI API and ChatGPT
+    api_key = "YOUR_API_KEY" # Replace with your OpenAI API key
+    api_url = "https://api.openai.com/v1/engines/davinci-codex/completions"
+    headers = {"Content-Type": "application/json", "Authorization": f"Bearer {api_key}"}
+    prompt = "Analyze the following network traffic and report back any harmful activities:\n\n" + text
+    data = {"prompt": prompt, "max_tokens": 1024, "temperature": 0.5}
+
+    response = requests.post(api_url, headers=headers, data=json.dumps(data))
+    response_json = json.loads(response.text)
+    output = response_json["choices"][0]["text"]
+
+    # Print the output from ChatGPT
+    print(output)
+
+# Call the function to capture and analyze network traffic
+capture_and_analyze()
+  
+  
+if selectednumber == 7:
  sys.exit()
 
  
